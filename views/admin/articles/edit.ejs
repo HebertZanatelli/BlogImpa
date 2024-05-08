@@ -1,0 +1,60 @@
+<%- include('../../partials/header.ejs') %>
+    <%- include('../../partials/navbar.ejs') %>
+
+        <div class="container">
+            <br>
+            <div class="card">
+                <div class="card-header">
+                    <h5>Atualizar Post</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="/articles/update">
+                        <input type="hidden" value="<%= article.id %>" name="id" id="id">
+                        <label for="title">Título</label>
+                        <input class='form-control' value="<%= article.title %>" type="text" name="title" placeholder="Defina o titulo do Post">
+                        <br>
+                        <label>Categoria</label>
+                        <select name="category" class="form-control"  >
+                            <% categories.forEach((category) => { %>
+
+                                <% if (category.id === article.categoryId) { %>
+                                    <option value="<%= category.id %>" selected><%= category.title %></option>
+                                <% }  else { %>
+                                    <option value="<%= category.id %>" ><%= category.title %></option>
+                                <% } %>
+                            <% }) %>
+                        </select> 
+                        <br>
+                        <label for="body">Conteúdo do Post</label>
+                        <textarea id="article" class='form-control' name="body" placeholder="Defina o conteúdo do Post" rows="6"></textarea>
+                        <br>
+                        <button class="btn btn-success">Atualizar</button>
+                    </form>
+                    
+                </div>
+            </div>
+
+        </div>
+        <br>
+
+        <div id="content" style="display: none;">
+            <%- article.body %>
+        </div>
+
+        <%- include('../../partials/footer.ejs') %>
+
+<script src="/tinymce/tinymce.min.js"></script>
+<script>
+    const conteudo = document.querySelector('#content')
+    
+    tinymce.init({
+        language: 'pt_BR',
+        selector: '#article',
+        // plugins: [
+        //     'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'
+        // ]
+        init_instance_callback: () =>{
+            tinymce.get('article').setContent(conteudo.innerHTML)
+        }
+    })
+</script>

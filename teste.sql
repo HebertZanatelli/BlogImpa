@@ -1,1 +1,0 @@
-update usuarios set nome = 'Nome Pica' where nome = 'Luiz';
