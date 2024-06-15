@@ -95,6 +95,6 @@ app.get('/category/:slug', (req, res) => {
     })
 })
 
-app.listen(8081, () => {
+app.listen(8080, () => {
     console.log("rodando servidor")
 })
